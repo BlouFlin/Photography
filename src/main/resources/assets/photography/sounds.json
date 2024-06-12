@@ -1,0 +1,13 @@
+{
+  "camera_shutter": {
+    "subtitle": "subtitles.photography.camera_shutter",
+    "sounds": [
+      "photography:item/camera/camera_shutter1",
+      "photography:item/camera/camera_shutter2",
+      "photography:item/camera/camera_shutter3",
+      "photography:item/camera/camera_shutter4",
+      "photography:item/camera/camera_shutter5",
+      "photography:item/camera/camera_shutter6"
+    ]
+  }
+}

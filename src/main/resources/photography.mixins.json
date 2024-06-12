@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "package": "net.blouflin.photography.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "PlayerEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "FovMultiplierMixin",
+    "ItemRendererMixin",
+    "ItemStackMixin",
+    "KeyboardMixin",
+    "MouseMixin",
+    "PlayerEntityRendererMixin",
+    "PlayerInventoryMixin",
+    "SpyglassItemMixin"
+  ]
+}

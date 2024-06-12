@@ -1,0 +1,22 @@
+{
+	"credit": "Photography mod (by BlouFlin)",
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "minecraft:item/filled_map",
+		"layer1": "minecraft:item/filled_map_markings"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"custom_model_data": 56775
+			},
+			"model": "photography:item/empty_photographic_paper"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 56776
+			},
+			"model": "photography:item/filled_photographic_paper"
+		}
+	]
+}

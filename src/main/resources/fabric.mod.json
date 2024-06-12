@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "photography",
+	"version": "${version}",
+	"name": "Photography",
+	"description": "Another camera mod to take photos of your world on maps!",
+	"authors": [
+		"BlouFlin"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/photography",
+		"sources": "https://github.com/BlouFlin"
+	},
+	"license": "MIT",
+	"icon": "assets/photography/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.blouflin.photography.Photography"
+		],
+		"client": [
+			"net.blouflin.photography.PhotographyClient"
+		],
+		"fabric-datagen": [
+			"net.blouflin.photography.PhotographyDataGenerator"
+		]
+	},
+	"mixins": [
+		"photography.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": ">=1.20.5 <=1.20.6",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

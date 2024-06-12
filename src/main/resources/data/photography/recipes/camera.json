@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "CCC",
+    "CSC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "S": {
+      "item": "minecraft:spyglass"
+    }
+  },
+  "result": {
+    "id": "minecraft:spyglass",
+    "count": 1,
+    "components": {
+      "minecraft:item_name": "{\"text\":\"Camera\"}",
+      "minecraft:custom_data": {
+        "isPhotographyCamera":1
+      },
+      "minecraft:custom_model_data": 56774
+    }
+  }
+}

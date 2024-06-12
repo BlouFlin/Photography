@@ -1,0 +1,72 @@
+{
+	"credit": "Photography mod (by BlouFlin)",
+	"textures": {
+		"1": "photography:item/camera",
+		"particle": "photography:item/camera"
+	},
+	"elements": [
+		{
+			"from": [5, 8.5, 6],
+			"to": [11, 11.5, 10],
+			"faces": {
+				"north": {"uv": [2, 5, 9, 9], "texture": "#1"},
+				"east": {"uv": [7, 9, 12, 13], "texture": "#1"},
+				"south": {"uv": [9, 5, 16, 9], "texture": "#1"},
+				"west": {"uv": [2, 9, 7, 13], "texture": "#1"},
+				"up": {"uv": [9, 0, 16, 5], "texture": "#1"},
+				"down": {"uv": [2, 0, 9, 5], "texture": "#1"}
+			}
+		},
+		{
+			"from": [6.9, 6.4, 6.9],
+			"to": [9.1, 9.6, 9.1],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 2, 0]},
+			"faces": {
+				"north": {"uv": [0, 6, 2, 9], "texture": "#1"},
+				"east": {"uv": [0, 6, 2, 9], "texture": "#1"},
+				"south": {"uv": [0, 6, 2, 9], "texture": "#1"},
+				"west": {"uv": [0, 6, 2, 9], "texture": "#1"},
+				"up": {"uv": [0, 0, 2, 2], "texture": "#1"},
+				"down": {"uv": [0, 13, 2, 15], "texture": "#1"}
+			}
+		}
+	],
+	"gui_light": "front",
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 0, 15],
+			"translation": [-2, 0.5, -3]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [75, 0, 15],
+			"translation": [-2, 0.5, -3]
+		},
+		"firstperson_righthand": {
+			"rotation": [110, 0, -20],
+			"translation": [-2.5, 5, 2]
+		},
+		"firstperson_lefthand": {
+			"rotation": [110, 0, -20],
+			"translation": [-2.5, 5, 2]
+		},
+		"ground": {
+			"rotation": [90, 0, 0],
+			"translation": [0, 0, -1]
+		},
+		"gui": {
+			"rotation": [-67.5, -180, -45],
+			"translation": [2.75, -1.25, 0],
+			"scale": [2, 2, 2]
+		},
+		"head": {
+			"rotation": [90, 0, 0],
+			"translation": [0, -4.25, -8.25],
+			"scale": [1.6, 1.6, 1.6]
+		},
+		"fixed": {
+			"rotation": [90, 0, 0],
+			"translation": [0, 0, -4],
+			"scale": [1.5, 1.5, 1.5]
+		}
+	}
+}
