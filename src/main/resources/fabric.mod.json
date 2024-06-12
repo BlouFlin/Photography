@@ -9,7 +9,8 @@
 	],
 	"contact": {
 		"homepage": "https://modrinth.com/mod/photography",
-		"sources": "https://github.com/BlouFlin"
+		"sources": "https://github.com/BlouFlin/Photography",
+		"issues": "https://github.com/BlouFlin/Photography/issues"
 	},
 	"license": "MIT",
 	"icon": "assets/photography/icon.png",
