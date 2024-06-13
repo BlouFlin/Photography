@@ -20,7 +20,7 @@ Here are the crafting recipes:
 
 ![Camera and Photographic Paper crafting recipes](https://github.com/BlouFlin/Photography/assets/128321038/262810de-fcd2-45ad-97ef-b8fdcc5d6180)
 
-Then use the camera by right-clicking to open the viewfinder. You can use the right-click to take a photo and the escape key to close the viewfinder. Taking a photo will consume a photographic paper from your inventory and give you a photograph.
+Then use the camera by right-clicking to open the viewfinder. You can use the right-click to take a photo, the mouse wheel to zoom, and the escape key to close the viewfinder. Taking a photo will consume a photographic paper from your inventory and give you a photograph.
 
 ![Demonstration of how to use the camera](https://github.com/BlouFlin/Photography/assets/128321038/619eb7ca-39ef-4ea0-809b-ccb8c639abd7)
 
