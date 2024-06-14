@@ -28,7 +28,7 @@ public record SpawnPicturePayload(Integer id, NbtCompound nbtCompound) implement
 
     public static void receive(ServerPlayerEntity player, Integer id, NbtCompound nbtCompound) {
 
-        MapIdComponent mapId = player.getEntityWorld().getNextMapId();
+        MapIdComponent mapId = new MapIdComponent(id);
         RegistryWrapper.WrapperLookup registryLookup = player.getRegistryManager();
         MapState mapState = MapState.fromNbt(nbtCompound, registryLookup);
 
