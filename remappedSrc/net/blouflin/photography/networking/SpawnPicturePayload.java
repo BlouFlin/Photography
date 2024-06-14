@@ -18,7 +18,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Unit;
 
 public record SpawnPicturePayload(Integer id, NbtCompound nbtCompound) implements CustomPayload {
-    public static final CustomPayload.Id<SpawnPicturePayload> ID = CustomPayload.id("photography_spawn_picture");
+    public static final CustomPayload.Id<SpawnPicturePayload> ID = CustomPayload.id("photography:spawn_picture");
     public static final PacketCodec<PacketByteBuf, SpawnPicturePayload> CODEC = PacketCodec.of((value, buf) -> buf.writeInt(value.id).writeNbt(value.nbtCompound), buf -> new SpawnPicturePayload(buf.readInt(),buf.readNbt()));
 
     @Override
@@ -28,7 +28,7 @@ public record SpawnPicturePayload(Integer id, NbtCompound nbtCompound) implement
 
     public static void receive(ServerPlayerEntity player, Integer id, NbtCompound nbtCompound) {
 
-        MapIdComponent mapId = player.getEntityWorld().increaseAndGetMapId();
+        MapIdComponent mapId = player.getEntityWorld().getNextMapId();
         RegistryWrapper.WrapperLookup registryLookup = player.getRegistryManager();
         MapState mapState = MapState.fromNbt(nbtCompound, registryLookup);
 

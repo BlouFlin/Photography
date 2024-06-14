@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 public class Photography implements ModInitializer {
 	public static final String MOD_ID = "Photography";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-	public static final Identifier CAMERA_SHUTTER_SOUND = Identifier.of("photography","camera_shutter");
+	public static final Identifier CAMERA_SHUTTER_SOUND = new Identifier("photography:camera_shutter");
 	public static SoundEvent CAMERA_SHUTTER = SoundEvent.of(CAMERA_SHUTTER_SOUND);
 
 	@Override

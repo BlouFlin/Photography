@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
 public record CreatePicturePayload(Integer id, NbtCompound nbtCompound) implements CustomPayload {
-    public static final CustomPayload.Id<CreatePicturePayload> ID = CustomPayload.id("photography_create_picture");
+    public static final CustomPayload.Id<CreatePicturePayload> ID = CustomPayload.id("photography:create_picture");
     public static final PacketCodec<PacketByteBuf, CreatePicturePayload> CODEC = PacketCodec.of((value, buf) -> buf.writeInt(value.id).writeNbt(value.nbtCompound), buf -> new CreatePicturePayload(buf.readInt(),buf.readNbt()));
 
     @Override

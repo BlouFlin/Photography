@@ -9,7 +9,7 @@ import net.minecraft.network.packet.CustomPayload;
 import java.util.UUID;
 
 public record GetUsingPhotographyCameraPayload(UUID player, Boolean isUsingPhotographyCamera, String handUsingPhotographyCamera) implements CustomPayload {
-    public static final CustomPayload.Id<GetUsingPhotographyCameraPayload> ID = CustomPayload.id("photography_get_using_photography_camera");
+    public static final CustomPayload.Id<GetUsingPhotographyCameraPayload> ID = CustomPayload.id("photography:get_using_photography_camera");
     public static final PacketCodec<PacketByteBuf, GetUsingPhotographyCameraPayload> CODEC = PacketCodec.of((value, buf) -> buf.writeUuid(value.player).writeBoolean(value.isUsingPhotographyCamera).writeString(value.handUsingPhotographyCamera), buf -> new GetUsingPhotographyCameraPayload(buf.readUuid(),buf.readBoolean(),buf.readString()));
 
     @Override

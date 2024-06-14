@@ -11,7 +11,7 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public record CreateMapStatePayload() implements CustomPayload {
-    public static final CustomPayload.Id<CreateMapStatePayload> ID = CustomPayload.id("photography_create_map_state");
+    public static final CustomPayload.Id<CreateMapStatePayload> ID = CustomPayload.id("photography:create_map_state");
     public static final PacketCodec<PacketByteBuf, CreateMapStatePayload> CODEC = PacketCodec.of((value, buf) -> {}, buf -> new CreateMapStatePayload());
 
     @Override
@@ -22,7 +22,7 @@ public record CreateMapStatePayload() implements CustomPayload {
     public static void receive(ServerPlayerEntity player) {
 
         player.server.execute(() -> {
-            int id = player.getEntityWorld().increaseAndGetMapId().id();
+            int id = player.getEntityWorld().getNextMapId().id();
             NbtCompound nbt = new NbtCompound();
             RegistryWrapper.WrapperLookup registryLookup = player.getRegistryManager();
             nbt.putString("dimension", player.getEntityWorld().getRegistryKey().getValue().toString());

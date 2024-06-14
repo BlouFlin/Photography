@@ -29,9 +29,9 @@ public class PhotographyHud {
     public static String handUsingPhotographyCamera = Hand.MAIN_HAND.name();
     public static double zoomAmount;
     public static double defaultMouseSensitivity;
-    public static final Identifier SPYGLASS_SCOPE = Identifier.ofVanilla("textures/misc/spyglass_scope.png");
-    public static final Identifier SPYGLASS_SCOPE_CLEAR = Identifier.of("photography","textures/misc/spyglass_scope_clear.png");
-    public static final Identifier SPYGLASS_SCOPE_FLASH = Identifier.of("photography","textures/misc/spyglass_scope_flash.png");
+    public static final Identifier SPYGLASS_SCOPE = new Identifier("minecraft:textures/misc/spyglass_scope.png");
+    public static final Identifier SPYGLASS_SCOPE_CLEAR = new Identifier("photography:textures/misc/spyglass_scope_clear.png");
+    public static final Identifier SPYGLASS_SCOPE_FLASH = new Identifier("photography:textures/misc/spyglass_scope_flash.png");
     public static Identifier SPYGLASS_SCOPE_TO_RENDER = SPYGLASS_SCOPE;
     private static final MinecraftClient client = MinecraftClient.getInstance();
     private static final KeyBinding escapeKeybinding = new KeyBinding("key.keyboard.escape", GLFW.GLFW_KEY_ESCAPE, KeyBinding.UI_CATEGORY);
@@ -43,7 +43,7 @@ public class PhotographyHud {
 
     public static void renderPhotographyCameraOverlay(DrawContext context) {
 
-        float f = client.getRenderTickCounter().getLastFrameDuration();
+        float f = client.getLastFrameDuration();
         spyglassScale = MathHelper.lerp(0.5f * f, spyglassScale, 1.125f);
 
         if (client.options.getPerspective().isFirstPerson() && client.currentScreen == null) {

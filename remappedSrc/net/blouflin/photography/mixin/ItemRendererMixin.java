@@ -15,16 +15,11 @@ import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.component.DataComponentTypes;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MatrixUtil;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -46,7 +41,8 @@ public abstract class ItemRendererMixin {
 
     @Shadow @Final private static ModelIdentifier SPYGLASS;
 
-    @Shadow public abstract BakedModel getModel(ItemStack stack, @Nullable World world, @Nullable LivingEntity entity, int seed);
+    @Unique
+    private static final ModelIdentifier PHOTOGRAPHY_CAMERA = new ModelIdentifier("photography","camera","inventory");
 
     @Inject(at = @At("HEAD"), cancellable = true, method = "renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V")
     private void injected(ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model, CallbackInfo ci) {
@@ -65,7 +61,7 @@ public abstract class ItemRendererMixin {
         }
         if (stack.isOf(Items.SPYGLASS) && stack.getComponents().contains(DataComponentTypes.CUSTOM_DATA)) {
             if (stack.getComponents().get(DataComponentTypes.CUSTOM_DATA).toString().contains("isPhotographyCamera:1b")) {
-                model = this.models.getModelManager().getModel(Identifier.of("photography","item/camera"));
+                model = this.models.getModelManager().getModel(PHOTOGRAPHY_CAMERA);
             }
         }
         model.getTransformation().getTransformation(renderMode).apply(leftHanded, matrices);
@@ -74,10 +70,8 @@ public abstract class ItemRendererMixin {
             this.builtinModelItemRenderer.render(stack, renderMode, matrices, vertexConsumers, light, overlay);
         } else {
             VertexConsumer vertexConsumer;
-            BlockItem blockItem;
             Block block;
-            Item item;
-            boolean bl22 = renderMode != ModelTransformationMode.GUI && !renderMode.isFirstPerson() && (item = stack.getItem()) instanceof BlockItem ? !((block = (blockItem = (BlockItem)item).getBlock()) instanceof TranslucentBlock) && !(block instanceof StainedGlassPaneBlock) : true;
+            boolean bl22 = renderMode != ModelTransformationMode.GUI && !renderMode.isFirstPerson() && stack.getItem() instanceof BlockItem ? !((block = ((BlockItem)stack.getItem()).getBlock()) instanceof TranslucentBlock) && !(block instanceof StainedGlassPaneBlock) : true;
             RenderLayer renderLayer = RenderLayers.getItemLayer(stack, bl22);
             if (usesDynamicDisplay(stack) && stack.hasGlint()) {
                 MatrixStack.Entry entry = matrices.peek().copy();
@@ -86,7 +80,7 @@ public abstract class ItemRendererMixin {
                 } else if (renderMode.isFirstPerson()) {
                     MatrixUtil.scale(entry.getPositionMatrix(), 0.75f);
                 }
-                vertexConsumer = ItemRenderer.getDynamicDisplayGlintConsumer(vertexConsumers, renderLayer, entry);
+                vertexConsumer = bl22 ? ItemRenderer.getDirectDynamicDisplayGlintConsumer(vertexConsumers, renderLayer, entry) : ItemRenderer.getDynamicDisplayGlintConsumer(vertexConsumers, renderLayer, entry);
             } else {
                 vertexConsumer = bl22 ? ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, renderLayer, true, stack.hasGlint()) : ItemRenderer.getItemGlintConsumer(vertexConsumers, renderLayer, true, stack.hasGlint());
             }

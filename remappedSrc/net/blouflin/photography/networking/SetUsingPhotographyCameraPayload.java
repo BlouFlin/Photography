@@ -9,7 +9,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
 
 public record SetUsingPhotographyCameraPayload(Boolean isUsingPhotographyCamera, String handUsingPhotographyCamera) implements CustomPayload {
-    public static final CustomPayload.Id<SetUsingPhotographyCameraPayload> ID = CustomPayload.id("photography_set_using_photography_camera");
+    public static final CustomPayload.Id<SetUsingPhotographyCameraPayload> ID = CustomPayload.id("photography:set_using_photography_camera");
     public static final PacketCodec<PacketByteBuf, SetUsingPhotographyCameraPayload> CODEC = PacketCodec.of((value, buf) -> buf.writeBoolean(value.isUsingPhotographyCamera).writeString(value.handUsingPhotographyCamera), buf -> new SetUsingPhotographyCameraPayload(buf.readBoolean(),buf.readString()));
 
     @Override

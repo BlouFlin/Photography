@@ -49,7 +49,7 @@ public class MapRenderer {
         // 1.17, so we create and apply our own MapState instead
         ItemStack stack = new ItemStack(Items.FILLED_MAP);
         //int id = world.getNextMapId().id();
-        MapIdComponent id = world.increaseAndGetMapId();
+        MapIdComponent id = world.getNextMapId();
         NbtCompound nbt = new NbtCompound();
         RegistryWrapper.WrapperLookup registryLookup = world.getRegistryManager();
 

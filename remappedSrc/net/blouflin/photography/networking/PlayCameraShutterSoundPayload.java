@@ -11,7 +11,7 @@ import net.minecraft.sound.SoundCategory;
 import java.util.UUID;
 
 public record PlayCameraShutterSoundPayload(UUID player) implements CustomPayload {
-    public static final Id<PlayCameraShutterSoundPayload> ID = CustomPayload.id("photography_play_camera_shutter_sound");
+    public static final Id<PlayCameraShutterSoundPayload> ID = CustomPayload.id("photography:play_camera_shutter_sound");
     public static final PacketCodec<PacketByteBuf, PlayCameraShutterSoundPayload> CODEC = PacketCodec.of((value, buf) -> buf.writeUuid(value.player), buf -> new PlayCameraShutterSoundPayload(buf.readUuid()));
 
     @Override

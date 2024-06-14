@@ -7,25 +7,22 @@ import net.blouflin.photography.networking.PlayCameraShutterSoundPayload;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
+import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderTickCounter;
+import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class PhotographyClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-
-        ModelLoadingPlugin.register(pluginContext -> pluginContext.addModels(Identifier.of("photography","item/camera")));
 
         PayloadTypeRegistry.playS2C().register(CreatePicturePayload.ID, CreatePicturePayload.CODEC);
         ClientPlayNetworking.registerGlobalReceiver(CreatePicturePayload.ID, (payload, handler) -> CreatePicturePayload.receive(handler.client(), payload.id(), payload.nbtCompound()));
@@ -37,6 +34,10 @@ public class PhotographyClient implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(PlayCameraShutterSoundPayload.ID, (payload, handler) -> PlayCameraShutterSoundPayload.receive(handler.client(), payload.player()));
 
         HudRenderCallback.EVENT.register(this::onHudRender);
+
+        ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> {
+            out.accept(new ModelIdentifier("photography","camera", "inventory"));
+        });
 
         UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
             if (PhotographyHud.isUsingPhotographyCamera) {
@@ -55,7 +56,7 @@ public class PhotographyClient implements ClientModInitializer {
         });
     }
 
-    private void onHudRender(DrawContext context, RenderTickCounter renderTickCounter) {
+    private void onHudRender(DrawContext context, float tickDelta) {
         if (PhotographyHud.isUsingPhotographyCamera) {
             PhotographyHud.renderPhotographyCameraOverlay(context);
         }
