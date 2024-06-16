@@ -29,10 +29,10 @@ public class PhotographyHud {
     public static String handUsingPhotographyCamera = Hand.MAIN_HAND.name();
     public static double zoomAmount;
     public static double defaultMouseSensitivity;
-    public static final Identifier SPYGLASS_SCOPE = Identifier.ofVanilla("textures/misc/spyglass_scope.png");
-    public static final Identifier SPYGLASS_SCOPE_CLEAR = Identifier.of("photography","textures/misc/spyglass_scope_clear.png");
-    public static final Identifier SPYGLASS_SCOPE_FLASH = Identifier.of("photography","textures/misc/spyglass_scope_flash.png");
-    public static Identifier SPYGLASS_SCOPE_TO_RENDER = SPYGLASS_SCOPE;
+    public static final Identifier CAMERA_SCOPE = Identifier.of("photography","textures/misc/camera_scope.png");
+    public static final Identifier CAMERA_SCOPE_CLEAR = Identifier.of("photography","textures/misc/camera_scope_clear.png");
+    public static final Identifier CAMERA_SCOPE_FLASH = Identifier.of("photography","textures/misc/camera_scope_flash.png");
+    public static Identifier CAMERA_SCOPE_TO_RENDER = CAMERA_SCOPE;
     private static final MinecraftClient client = MinecraftClient.getInstance();
     private static final KeyBinding escapeKeybinding = new KeyBinding("key.keyboard.escape", GLFW.GLFW_KEY_ESCAPE, KeyBinding.UI_CATEGORY);
 
@@ -116,10 +116,10 @@ public class PhotographyHud {
         RenderSystem.defaultBlendFunc();
 
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-        context.drawTexture(SPYGLASS_SCOPE_TO_RENDER, k, l, -90, 0.0f, 0.0f, i, j, i, j);
+        context.drawTexture(CAMERA_SCOPE_TO_RENDER, k, l, -90, 0.0f, 0.0f, i, j, i, j);
 
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, spyglassFlashOpacity);
-        context.drawTexture(SPYGLASS_SCOPE_FLASH, k, l, -90, 0.0f, 0.0f, i, j, i, j);
+        context.drawTexture(CAMERA_SCOPE_FLASH, k, l, -90, 0.0f, 0.0f, i, j, i, j);
 
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
