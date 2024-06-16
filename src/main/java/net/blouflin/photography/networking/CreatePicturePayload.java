@@ -37,14 +37,14 @@ public record CreatePicturePayload(Integer id, NbtCompound nbtCompound) implemen
             RegistryWrapper.WrapperLookup registryLookup = client.player.getRegistryManager();
             MapState mapState = MapState.fromNbt(nbtCompound, registryLookup);
 
-            PhotographyHud.SPYGLASS_SCOPE_TO_RENDER = PhotographyHud.SPYGLASS_SCOPE_CLEAR;
+            PhotographyHud.CAMERA_SCOPE_TO_RENDER = PhotographyHud.CAMERA_SCOPE_CLEAR;
 
             PhotographyHud.setScreenshotFuture(future);
 
             future.thenRun(() -> {
                 NativeImage nativeImage = ScreenshotRecorder.takeScreenshot(client.getFramebuffer());
 
-                PhotographyHud.SPYGLASS_SCOPE_TO_RENDER = PhotographyHud.SPYGLASS_SCOPE;
+                PhotographyHud.CAMERA_SCOPE_TO_RENDER = PhotographyHud.CAMERA_SCOPE;
                 PhotographyHud.spyglassFlashOpacity = 1.0f;
                 PhotographyHud.isTakingPhoto = false;
 
