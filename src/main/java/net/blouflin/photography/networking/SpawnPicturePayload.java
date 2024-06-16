@@ -15,7 +15,10 @@ import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Unit;
+
+import java.util.Objects;
 
 public record SpawnPicturePayload(Integer id, NbtCompound nbtCompound) implements CustomPayload {
     public static final CustomPayload.Id<SpawnPicturePayload> ID = CustomPayload.id("photography_spawn_picture");
@@ -55,13 +58,10 @@ public record SpawnPicturePayload(Integer id, NbtCompound nbtCompound) implement
 
                 int slot = player.getInventory().getSlotWithStack(itemStack);
                 if(slot != -1) {
-                    player.getInventory().getStack(slot).decrement(1);
-
-                    if (player.getInventory().insertStack(stack)) {
-                        player.getInventory().insertStack(stack);
-                    } else {
-                        ItemEntity itemEntity = new ItemEntity(player.getServerWorld(), player.getPos().x, player.getPos().y, player.getPos().z, stack);
-                        player.getServerWorld().spawnEntity(itemEntity);
+                    convertStack(player, slot, stack);
+                } else if (player.getStackInHand(Hand.OFF_HAND).getItem() == itemStack.getItem()) {
+                    if (Objects.equals(player.getStackInHand(Hand.OFF_HAND).getComponents().get(DataComponentTypes.CUSTOM_DATA), itemStack.getComponents().get(DataComponentTypes.CUSTOM_DATA))) {
+                        convertStack(player, 40, stack);
                     }
                 }
             }
@@ -73,8 +73,17 @@ public record SpawnPicturePayload(Integer id, NbtCompound nbtCompound) implement
                     player.getServerWorld().spawnEntity(itemEntity);
                 }
             }
-
         });
+    }
 
+    private static void convertStack(ServerPlayerEntity player, int slot, ItemStack stack) {
+        player.getInventory().getStack(slot).decrement(1);
+
+        if (player.getInventory().insertStack(stack)) {
+            player.getInventory().insertStack(stack);
+        } else {
+            ItemEntity itemEntity = new ItemEntity(player.getServerWorld(), player.getPos().x, player.getPos().y, player.getPos().z, stack);
+            player.getServerWorld().spawnEntity(itemEntity);
+        }
     }
 }
