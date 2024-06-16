@@ -49,7 +49,9 @@ public class PhotographyHud {
         if (client.options.getPerspective().isFirstPerson() && client.currentScreen == null) {
             client.options.hudHidden = true;
             checkIsPhotographyCameraOpen(client);
-            renderSpyglassOverlay(context, spyglassScale);
+            if (!isHUDhidden) {
+                renderSpyglassOverlay(context, spyglassScale);
+            }
             spyglassFlashOpacity = MathHelper.lerp(0.1f * f, spyglassFlashOpacity, 0.025f);
 
             if (spyglassScale >= 1.1f && spyglassFlashOpacity <= 0.1f && !isTakingPhoto) {

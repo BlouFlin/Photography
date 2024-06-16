@@ -18,6 +18,8 @@ public class KeyboardMixin {
                 PhotographyHud.isUsingPhotographyCamera = false;
                 PhotographyHud.stopRenderPhotographyCameraOverlay();
                 ci.cancel();
+            } else if (key == GLFW.GLFW_KEY_F1) {
+                ci.cancel();
             }
         }
     }
