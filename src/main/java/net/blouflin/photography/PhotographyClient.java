@@ -12,11 +12,14 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
+import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.ModelIdentifier;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
 
 @Environment(EnvType.CLIENT)
 public class PhotographyClient implements ClientModInitializer {
@@ -53,6 +56,14 @@ public class PhotographyClient implements ClientModInitializer {
                 return ActionResult.FAIL;
             }
             return ActionResult.PASS;
+        });
+
+        UseItemCallback.EVENT.register((player, world, hand) -> {
+            if (PhotographyHud.isUsingPhotographyCamera) {
+                player.getStackInHand(Hand.valueOf(PhotographyHud.handUsingPhotographyCamera)).use(world, player, Hand.valueOf(PhotographyHud.handUsingPhotographyCamera));
+                return TypedActionResult.fail(ItemStack.EMPTY);
+            }
+            return TypedActionResult.pass(ItemStack.EMPTY);
         });
     }
 
