@@ -32,6 +32,10 @@ public abstract class ItemStackMixin {
                     cir.setReturnValue(Text.translatable("item.photography.empty_map"));
                 } else if (this.getComponents().get(DataComponentTypes.CUSTOM_DATA).toString().contains("isPhotographyFilledMap:1b")) {
                     cir.setReturnValue(Text.translatable("item.photography.filled_map"));
+                } else if (text2 != null) {
+                    cir.setReturnValue(text2);
+                } else {
+                    cir.setReturnValue(this.getItem().getName(this.getItem().getDefaultStack()));
                 }
             } else if (text2 != null) {
                 cir.setReturnValue(text2);
