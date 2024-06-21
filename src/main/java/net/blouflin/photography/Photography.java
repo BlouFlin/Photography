@@ -1,8 +1,6 @@
 package net.blouflin.photography;
 
-import net.blouflin.photography.networking.CreateMapStatePayload;
-import net.blouflin.photography.networking.SetUsingPhotographyCameraPayload;
-import net.blouflin.photography.networking.SpawnPicturePayload;
+import net.blouflin.photography.networking.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -34,6 +32,10 @@ public class Photography implements ModInitializer {
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(this::addItemsToCreativeTab);
 
 		Registry.register(Registries.SOUND_EVENT, CAMERA_SHUTTER_SOUND, CAMERA_SHUTTER);
+
+		PayloadTypeRegistry.playS2C().register(CreatePicturePayload.ID, CreatePicturePayload.CODEC);
+		PayloadTypeRegistry.playS2C().register(GetUsingPhotographyCameraPayload.ID, GetUsingPhotographyCameraPayload.CODEC);
+		PayloadTypeRegistry.playS2C().register(PlayCameraShutterSoundPayload.ID, PlayCameraShutterSoundPayload.CODEC);
 
 		PayloadTypeRegistry.playC2S().register(CreateMapStatePayload.ID, CreateMapStatePayload.CODEC);
 		ServerPlayNetworking.registerGlobalReceiver(CreateMapStatePayload.ID, (payload, handler) -> CreateMapStatePayload.receive(handler.player()));

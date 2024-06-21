@@ -19,6 +19,7 @@ public record SetUsingPhotographyCameraPayload(Boolean isUsingPhotographyCamera,
 
     public static void receive(ServerPlayerEntity player, Boolean isUsingPhotographyCamera, String handUsingPhotographyCamera) {
         player.server.execute(() -> {
+
             ((PlayerIsUsingCamera) player).setUsingPhotographyCamera(isUsingPhotographyCamera,handUsingPhotographyCamera);
             if (isUsingPhotographyCamera) {
                 player.playSound(SoundEvents.ITEM_SPYGLASS_USE, 1.0f, 1.0f);
