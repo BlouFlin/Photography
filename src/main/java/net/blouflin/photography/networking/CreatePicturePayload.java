@@ -34,6 +34,7 @@ public record CreatePicturePayload(Integer id, NbtCompound nbtCompound) implemen
         CompletableFuture<Void> future = new CompletableFuture<>();
 
         client.execute(() -> {
+
             RegistryWrapper.WrapperLookup registryLookup = client.player.getRegistryManager();
             MapState mapState = MapState.fromNbt(nbtCompound, registryLookup);
 

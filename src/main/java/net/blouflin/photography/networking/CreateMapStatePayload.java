@@ -9,6 +9,7 @@ import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.math.GlobalPos;
 
 public record CreateMapStatePayload() implements CustomPayload {
     public static final CustomPayload.Id<CreateMapStatePayload> ID = CustomPayload.id("photography:create_map_state");
@@ -22,6 +23,7 @@ public record CreateMapStatePayload() implements CustomPayload {
     public static void receive(ServerPlayerEntity player) {
 
         player.server.execute(() -> {
+
             int id = player.getEntityWorld().getNextMapId().id();
             NbtCompound nbt = new NbtCompound();
             RegistryWrapper.WrapperLookup registryLookup = player.getRegistryManager();
@@ -40,7 +42,7 @@ public record CreateMapStatePayload() implements CustomPayload {
             nbtCompound = state.writeNbt(nbtCompound, registryLookup);
 
             for (ServerPlayerEntity otherPlayer : player.server.getPlayerManager().getPlayerList()) {
-                PlayCameraShutterSoundPayload payload = new PlayCameraShutterSoundPayload(player.getUuid());
+                PlayCameraShutterSoundPayload payload = new PlayCameraShutterSoundPayload(GlobalPos.create(player.getEntityWorld().getRegistryKey(),player.getBlockPos()));
                 ServerPlayNetworking.send(otherPlayer,payload);
             }
 

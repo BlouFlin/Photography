@@ -19,6 +19,7 @@ public record GetUsingPhotographyCameraPayload(UUID player, Boolean isUsingPhoto
 
     public static void receive(MinecraftClient client, UUID player, Boolean isUsingPhotographyCamera, String handUsingPhotographyCamera) {
         client.execute(() -> {
+
             ((PlayerIsUsingCamera) client.world.getPlayerByUuid(player)).setUsingPhotographyCamera(isUsingPhotographyCamera,handUsingPhotographyCamera);
         });
     }
