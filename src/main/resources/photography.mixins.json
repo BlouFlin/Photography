@@ -3,7 +3,8 @@
   "package": "net.blouflin.photography.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "RegistrySyncManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
