@@ -17,6 +17,10 @@ public abstract class ItemStackMixin {
 
     @Shadow public abstract Item getItem();
 
+    @Shadow public abstract Text getName();
+
+    @Shadow public abstract ItemStack copy();
+
     @Inject(method = "getName", at = @At("HEAD"), cancellable = true)
     private void injected(CallbackInfoReturnable<Text> cir) {
         cir.cancel();
@@ -40,7 +44,7 @@ public abstract class ItemStackMixin {
             } else if (text2 != null) {
                 cir.setReturnValue(text2);
             } else {
-                cir.setReturnValue(this.getItem().getName(this.getItem().getDefaultStack()));
+                cir.setReturnValue(this.getItem().getName(this.copy()));
             }
         }
     }
